@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Assistant - AI Task Manager</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #34495e;
+            color: white;
+            padding: 30px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 40px;
+            color: #ecf0f1;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .sidebar ul li {
+            font-size: 18px;
+            color: #ecf0f1;
+            padding: 12px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+        .sidebar ul li:hover {
+            background-color: #16a085;
+            border-radius: 8px;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content h2 {
+            font-size: 36px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .task-list {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 2px solid #ecf0f1;
+            font-size: 18px;
+        }
+        .task-item:last-child {
+            border-bottom: none;
+        }
+        .task-status {
+            font-weight: bold;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+        .task-status.urgent {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .task-status.in-progress {
+            background-color: #f39c12;
+            color: white;
+        }
+        .task-status.completed {
+            background-color: #2ecc71;
+            color: white;
+        }
+        .notifications {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .notifications h3 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .notification-item {
+            margin: 12px 0;
+            font-size: 18px;
+            color: #7f8c8d;
+        }
+        .upcoming-tasks {
+            background: linear-gradient(145deg, #f39c12, #f1c40f);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: white;
+            margin-bottom: 40px;
+        }
+        .upcoming-tasks h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .task-list-upcoming {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .upcoming-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px; /* Reduced padding to make footer smaller */
+            background-color: #34495e;
+            color: white;
+            position: relative;
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .task-list {
+                padding: 20px;
+            }
+            .task-item {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li>Home</li>
+                <li>Tasks</li>
+                <li>Analytics</li>
+                <li>Settings</li>
+                <li>Help</li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h2>Task Management</h2>
+            <div class="task-list">
+                <div class="task-item">
+                    <span>Task 1 - Design UI</span>
+                    <span class="task-status urgent">Urgent</span>
+                </div>
+                <div class="task-item">
+                    <span>Task 2 - Backend Setup</span>
+                    <span class="task-status in-progress">In Progress</span>
+                </div>
+                <div class="task-item">
+                    <span>Task 3 - AI Model Integration</span>
+                    <span class="task-status completed">Completed</span>
+                </div>
+            </div>
+            <div class="notifications">
+                <h3>Notifications</h3>
+                <div class="notification-item">Task 1 deadline approaching!</div>
+                <div class="notification-item">New task assigned: Data Analysis</div>
+                <div class="notification-item">New update: Task 2 now has extra resources.</div>
+            </div>
+
+            <!-- Upcoming Tasks Section -->
+            <div class="upcoming-tasks">
+                <h3>Upcoming Tasks</h3>
+                <div class="task-list-upcoming">
+                    <div class="upcoming-item">Task 4 - Client Presentation</div>
+                    <div class="upcoming-item">Task 5 - Database Optimization</div>
+                    <div class="upcoming-item">Task 6 - Testing and Bug Fixing</div>
+                    <div class="upcoming-item">Task 7 - Final Report</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Virtual Assistant Project - All Rights Reserved</p>
+    </div>
+</body>
+</html>
